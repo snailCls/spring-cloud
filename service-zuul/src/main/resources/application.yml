@@ -1,0 +1,23 @@
+server:
+  port: 8005
+spring:
+  application:
+    name: service-zuul
+eureka:
+  instance:
+    hostname: 127.0.0.1
+    port: 8000
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka
+zuul:
+  routes:
+    provider:
+      path: /provider/**
+      serviceId: service-provider-8001
+    providertwo:
+      path: /providertwo/**
+      serviceId: service-provider-two-8004
+    hystrix:
+      path: /hystrix/**
+      serviceId: service-hystrix-8003
